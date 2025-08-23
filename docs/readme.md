@@ -307,7 +307,7 @@ MIT License - see the [LICENSE](LICENSE) file for details.
 
 If you find Codex-OS helpful, consider supporting the project:
 
-[![ko-fi](assets/support_me_on_kofi_badge_blue.webp)](https://ko-fi.com/A0A11JWH8S)
+[![ko-fi]([assets/support_me_on_kofi_badge_blue.webp](https://github.com/forsonny/book-os/raw/main/assets/support_me_on_kofi_badge_blue.webp))](https://ko-fi.com/A0A11JWH8S)
 
 Your support helps maintain and improve Codex-OS!
 
