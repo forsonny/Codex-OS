@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.ruff]
+# General settings
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E","F","W","I","N","UP","S","B","A","C4","SIM","PL"]
+ignore = ["ANN101","ANN102"]  # allow missing self/cls annotations
+
+[tool.ruff.lint.isort]
+known-first-party = ["yourpkg"]
+combine-as-imports = true
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unreachable = true
+warn_return_any = true
+disallow_any_generics = true
+check_untyped_defs = true
+no_implicit_optional = true
+exclude = ["tests/fixtures/", "build/"]

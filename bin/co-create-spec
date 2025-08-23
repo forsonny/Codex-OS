@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+SPEC_TITLE="${*:-New feature}"
+codex exec --ask-for-approval \
+  "Create a new spec for: ${SPEC_TITLE}
+   Use .codex-os/instructions/core/create-spec.md.
+   Create a dated folder in .codex-os/specs/ (kebab-case title).
+   Write srd.md, tech-spec.md, and tasks.md.
+   Align with .codex-os/standards/ and .codex-os/product/ context."

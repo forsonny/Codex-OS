@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+SPEC_DIR="${1:-}"; TASK_ID="${2:-}"
+if [[ -z "$SPEC_DIR" || -z "$TASK_ID" ]]; then
+  echo "Usage: co-exec-task .codex-os/specs/... TASK_ID" >&2; exit 1
+fi
+codex exec \
+  "Execute task ${TASK_ID} from ${SPEC_DIR}/tasks.md following
+   .codex-os/instructions/core/execute-task.md.
+   Make the minimal changes to pass tests and commit."

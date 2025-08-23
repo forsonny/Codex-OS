@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+codex exec --full-auto \
+  "Follow the workflow in .codex-os/instructions/core/plan-product.md.
+   Read existing product docs in .codex-os/product/.
+   Update roadmap/mission/decisions/stack as needed.
+   Keep changes consistent with project standards in .codex-os/standards/."

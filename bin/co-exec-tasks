@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -euo pipefail
+SPEC_DIR="${1:-}"
+if [[ -z "$SPEC_DIR" ]]; then
+  echo "Usage: co-exec-tasks .codex-os/specs/YYYY-MM-DD-my-spec" >&2; exit 1
+fi
+codex exec \
+  "Execute the tasks in ${SPEC_DIR}/tasks.md using
+   .codex-os/instructions/core/execute-tasks.md.
+   Implement incrementally with tests and small commits."
