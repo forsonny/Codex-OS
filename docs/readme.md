@@ -1,17 +1,24 @@
 # Codex-OS
 
-**A structured development operating system for turning product requirements into working software through consistent workflows, standards, and documentation.**
+**An AI-powered development framework that transforms product ideas into production-ready software through intelligent workflows, consistent standards, and seamless AI assistant integration.**
 
-Codex-OS provides a complete framework for software development that emphasizes safety, quality, and reproducibility. It includes opinionated workflows, coding standards, and automation tools to streamline the journey from PRD to production.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 
-## 🎯 Purpose
+---
 
-Codex-OS helps teams:
-- Transform product requirements into actionable technical specs
-- Maintain consistent code quality and style across projects
-- Execute development tasks safely and incrementally
-- Document decisions and maintain living architecture docs
-- Automate repetitive workflows while maintaining human oversight
+## 🎯 Why Codex-OS?
+
+**The Problem:** Most development teams struggle with inconsistency—different coding styles, ad-hoc planning processes, incomplete documentation, and manual repetitive tasks that lead to bugs and technical debt.
+
+**The Solution:** Codex-OS provides an **AI-powered development framework** that guides you from initial product requirements to production deployment with:
+
+- 🤖 **AI-First Workflows** — Work naturally with AI assistants using simple commands
+- 📋 **Structured Planning** — Turn PRDs into actionable technical specs
+- 🔄 **Consistent Processes** — Repeatable workflows for every development phase  
+- 🛡️ **Safety by Default** — Built-in quality gates and rollback strategies
+- 📚 **Living Documentation** — Auto-updating specs and decision records
 
 ## 🚀 Quick Start
 
@@ -97,205 +104,209 @@ Codex-OS helps teams:
    npm install  # or pnpm install
    ```
 
-### Directory Structure After Installation
+### Your First Project
 
-After installation, you'll have:
+You need to add/update the `.codex-os/specs/srd.md`. The `srd.md` is the file where you will place your PRD or MVP infomation in.
 
-**In your project directory (codex-os/):**
-```
-codex-os/
-├── .codex-os/       # Project-specific Codex-OS files
-│   ├── product/     # (initially empty, filled as you work)
-│   ├── specs/       # (initially empty, filled as you create specs)
-│   └── standards/   # (can override global standards if needed)
-│
-├── bin/             # Helper scripts
-│   ├── co-plan
-│   ├── co-create-spec
-│   ├── co-exec-tasks
-│   ├── co-exec-task
-│   └── co-analyze
-│
-├── scripts/         # Utility scripts
-│   └── install-global.sh  # Automated installation script
-│
-└── [other project files like package.json, tsconfig.json, etc.]
-```
-
-**In your home directory (~/):**
-```
-~/.codex-os/         # Global Codex-OS defaults
-├── instructions/    # Core workflow playbooks
-│   └── core/
-│       ├── plan-product.md
-│       ├── create-spec.md
-│       ├── execute-tasks.md
-│       ├── execute-task.md
-│       └── analyze-product.md
-├── standards/       # Global coding standards
-│   ├── tech-stack.md
-│   ├── code-style.md
-│   ├── best-practices.md
-│   └── code-style/
-│       ├── typescript.md
-│       ├── python.md
-│       ├── javascript.md
-│       └── markdown.md
-└── product/         # Global product defaults
-
-~/.codex/
-├── AGENTS.md        # Global Codex guidance for AI assistants
-└── AGENTS.md.backup.* # Backup of previous AGENTS.md (if it existed)
-```
-
-### How It Works
-
-- **Project-local files take precedence**: When both `.codex-os/` (project) and `~/.codex-os/` (global) contain the same file, the project-local version is used
-- **Global defaults as fallback**: If a file doesn't exist in the project's `.codex-os/`, the system falls back to `~/.codex-os/`
-- **AGENTS.md**: Provides guidance for AI assistants using Codex-OS
-
-### First Project Setup
-
-```bash
-# From within the codex-os directory:
-
-# 1. Plan your product from a PRD
-bin/co-plan
-
-# 2. Create your first spec
-bin/co-create-spec "User Authentication"
-
-# 3. Execute the spec tasks
-bin/co-exec-tasks .codex-os/specs/2025-08-23-user-authentication
-
-# 4. Analyze your codebase health
-bin/co-analyze
-```
-
-## 📁 Directory Structure
+**Work with your AI assistant using these commands:**
 
 ```
-.codex-os/
-├── product/              # Product documentation
-│   ├── mission.md       # Vision, audience, value proposition
-│   ├── roadmap.md       # Milestones and timeline
-│   ├── decisions.md     # Architecture Decision Records (ADRs)
-│   ├── stack.md         # Technology choices
-│   └── analysis.md      # Generated codebase analysis
-│
-├── standards/           # Development standards (optional, overrides global)
-│   ├── tech-stack.md    # Default technology choices
-│   ├── code-style.md    # Cross-language style guide
-│   ├── best-practices.md # Engineering principles
-│   └── code-style/      # Language-specific guides
-│       ├── typescript.md
-│       ├── python.md
-│       ├── javascript.md
-│       └── markdown.md
-│
-├── instructions/        # Workflow playbooks (usually in global)
-│   └── core/
-│       ├── plan-product.md    # Product planning workflow
-│       ├── create-spec.md     # Spec creation workflow
-│       ├── execute-tasks.md   # Task execution workflow
-│       ├── execute-task.md    # Single task execution
-│       └── analyze-product.md # Codebase analysis workflow
-│
-└── specs/              # Feature specifications
-    └── YYYY-MM-DD-kebab-title/
-        ├── srd.md      # Software Requirements Document
-        ├── tech-spec.md # Technical specification
-        └── tasks.md    # Prioritized task list
+/co-plan
+```
+*Plan your product from requirements*
+
+```
+/co-create-spec User Authentication System
+```
+> **💡 Pro Tip:** Use `/co-create-spec` to create a spec for the full project based on srd.md
+
+*Create a technical specification*
+
+```
+/co-exec-tasks .codex-os/specs/2025-08-23-user-authentication-system
+```
+*Execute the implementation*
+
+```
+/co-exec-task [TASK-ID]
+```
+*Execute excate task*
+
+```
+/co-analyze
+```
+*Analyze your codebase health*
+
+> **💡 Pro Tip:** These `/co-` commands work with Claude, GPT, and other AI assistants. Just type the command and your AI will execute the corresponding workflow!
+
+## 🏗️ How It Works
+
+Codex-OS is an **AI-powered development framework** that guides you through a proven workflow:
+
+```
+PRD/Idea → /co-plan → /co-create-spec → /co-exec-tasks → /co-analyze → Deploy
+    ↓          ↓           ↓              ↓            ↓          ↓
+  Goals → Roadmap → Specification → Implementation → Health → Production
 ```
 
-## 🔧 Core Workflows
+### 1. **`/co-plan`** 📋
+*Transform raw product requirements into structured documentation*
+- Mission and success metrics
+- Technology stack decisions  
+- Roadmap with milestones
+- Architecture decision records (ADRs)
 
-### 1. Plan Product
-Transform a raw PRD into structured product documentation:
-```bash
-bin/co-plan
-```
-**Outputs:** Updated mission, roadmap, decisions, and stack documents
+### 2. **`/co-create-spec`** 📝
+*Convert plans into actionable technical specifications*
+- Software Requirements Document (SRD)
+- Technical architecture and APIs
+- Prioritized task breakdown with acceptance criteria
 
-### 2. Create Spec
-Convert product requirements into actionable technical specifications:
-```bash
-bin/co-create-spec "Feature Name"
-```
-**Outputs:** New spec folder with SRD, tech spec, and task list
+### 3. **`/co-exec-tasks`** ⚡
+*Implement features safely with automated quality gates*
+- Test-driven development
+- Small, atomic commits
+- Continuous integration
+- Documentation updates
 
-### 3. Execute Tasks
-Implement all tasks from a spec with tests and documentation:
-```bash
-bin/co-exec-tasks .codex-os/specs/YYYY-MM-DD-feature-name
-```
-**Outputs:** Working code, tests, updated documentation
+### 4. **`/co-analyze`** 🔍
+*Monitor codebase health and identify improvements*
+- Architecture analysis
+- Risk assessment
+- Performance bottlenecks
+- Actionable recommendations
 
-### 4. Execute Single Task
-Implement one specific task from a spec:
-```bash
-bin/co-exec-task .codex-os/specs/YYYY-MM-DD-feature-name T-001
-```
-**Outputs:** Minimal code change to satisfy task requirements
+> **🤖 AI-First Approach:** Simply type these commands with your AI assistant (Claude, GPT, etc.) and watch as they execute complete workflows, write code, run tests, and update documentation automatically.
 
-### 5. Analyze Product
-Generate a comprehensive analysis of your codebase:
-```bash
-bin/co-analyze
-```
-**Outputs:** Architecture overview, risks, recommendations in `product/analysis.md`
+## 🛠️ Core Features
 
-## 🛠️ Technology Stack
-
-### Default Stack (Full-Stack Web)
-- **Frontend:** React 18 + Next.js 14+ (App Router)
-- **Backend:** FastAPI (Python) or NestJS (TypeScript)
-- **Database:** PostgreSQL 15+
-- **Cache:** Redis 7+
-- **Testing:** Vitest/Jest (TS), pytest (Python), Playwright (E2E)
-- **CI/CD:** GitHub Actions
-- **Container:** Docker + docker-compose
-
-### Supported Languages
-- TypeScript/JavaScript (primary)
-- Python 3.11+ (services, data workflows)
-- Bash (automation scripts)
-
-## 📝 Standards & Best Practices
-
-### Code Style
-- **TypeScript:** Prettier + ESLint with strict mode
-- **Python:** Black + Ruff with type hints
-- **Commits:** Conventional Commits format
-- **Testing:** Unit > Integration > E2E pyramid
-
-### Core Principles
-- Small, reversible changes
-- Tests prove behavior
-- Security by default
-- Documentation as code
-- Automation over manual processes
-
-## 🎮 Helper Scripts
+### 🤖 **AI-Powered Commands**
+The primary way to interact with Codex-OS is through AI assistant commands:
 
 | Command | Purpose |
 |---------|---------|
-| `bin/co-plan` | Update product documentation from PRD |
-| `bin/co-create-spec` | Create new feature specification |
-| `bin/co-exec-tasks` | Execute all tasks in a spec |
-| `bin/co-exec-task` | Execute a single task |
-| `bin/co-analyze` | Analyze codebase health |
+| `/co-plan` | Update product documentation from requirements |
+| `/co-create-spec [title]` | Generate new feature specifications |
+| `/co-exec-tasks [spec-path]` | Execute all tasks in a specification |
+| `/co-exec-task [task-id]` | Execute a single task with minimal changes |
+| `/co-analyze` | Analyze codebase health and generate reports |
 
-## 🔒 Safety Features
+*These commands integrate seamlessly with Claude, GPT, and other AI assistants through the global `AGENTS.md` configuration.*
 
-- **Non-destructive by default:** All risky operations require explicit approval
-- **Incremental migrations:** Forward-only with rollback plans
-- **Test-first development:** Write tests before implementation
-- **Small commits:** One logical change per commit
-- **Documentation requirements:** ADRs for architectural decisions
+### 📁 **Intelligent Project Structure**
+```
+.codex-os/
+├── product/         # Mission, roadmap, decisions, stack
+├── specs/          # Feature specifications with tasks
+└── standards/      # Coding standards and best practices
+```
 
+### 🎨 **Opinionated but Flexible Standards**
+- **TypeScript/JavaScript**: Prettier + ESLint with strict mode
+- **Python**: Black + Ruff with comprehensive type hints  
+- **Testing**: Unit → Integration → E2E pyramid
+- **Git**: Conventional Commits with semantic versioning
+- **Security**: Secret scanning, dependency auditing, safe defaults
 
+### 🔧 **Optional CLI Tools**
+For users who prefer direct command-line access, helper scripts are available:
+```bash
+bin/co-plan              # Alternative to /co-plan
+bin/co-create-spec       # Alternative to /co-create-spec
+bin/co-exec-tasks        # Alternative to /co-exec-tasks
+# ... etc
+```
+
+## 🏗️ Technology Stack
+
+### **Default Full-Stack Web**
+- **Frontend**: React 18 + Next.js 14+ (App Router)
+- **Backend**: FastAPI (Python) or NestJS (TypeScript)
+- **Database**: PostgreSQL 15+ with Redis caching
+- **Testing**: Vitest/Jest + pytest + Playwright
+- **DevOps**: Docker + GitHub Actions
+
+### **Supported Languages**
+- **TypeScript/JavaScript** (primary)
+- **Python 3.11+** (services, data workflows)  
+- **Bash** (automation scripts)
+
+## 📖 Real-World Example
+
+Let's say you have a PRD for a "Snake Game in 3D". Here's how Codex-OS guides you through your AI assistant:
+
+### 1. Planning Phase
+```
+/co-plan
+```
+**AI Creates:**
+- `product/mission.md` — Problem statement and success metrics
+- `product/stack.md` — Three.js + HTML5 + TypeScript decisions
+- `product/roadmap.md` — MVP → v1 → v1.x milestones
+
+### 2. Specification Phase  
+```
+/co-create-spec 3D Snake Game
+```
+**AI Creates:**
+- `specs/2025-08-23-3d-snake-game/srd.md` — User requirements
+- `specs/2025-08-23-3d-snake-game/tech-spec.md` — 3D architecture, controls, rendering
+- `specs/2025-08-23-3d-snake-game/tasks.md` — 12 atomic, testable tasks
+
+### 3. Execution Phase
+```
+/co-exec-tasks .codex-os/specs/2025-08-23-3d-snake-game
+```
+**AI Implements:**
+- Task 1: Three.js scene setup with camera
+- Task 2: Snake entity with movement physics  
+- Task 3: Food generation and collision detection
+- ...and so on, with tests and documentation
+
+### 4. Analysis Phase
+```
+/co-analyze
+```
+**AI Generates:**
+- Performance analysis (60 FPS requirement met?)
+- Security review (no XSS vulnerabilities)
+- Code quality metrics (test coverage, complexity)
+- Recommendations for optimization
+
+> **🎯 The Result:** A complete, production-ready 3D Snake Game built through AI collaboration, with comprehensive tests, documentation, and quality assurance—all from a simple PRD!
+
+## 📚 Documentation
+
+### **Getting Started**
+- [Installation Guide](#installation) — Automated and manual setup
+- [First Project](#your-first-project) — Walk through the complete workflow
+- [CLI Reference](#powerful-cli-tools) — All available commands
+
+### **Advanced Usage**  
+- [Custom Standards](/.codex-os/standards/) — Override global defaults
+- [Workflow Customization](/.codex-os/instructions/) — Adapt processes to your needs
+- [AI Integration](/move%20to%20HOME/.codex/AGENTS.md) — Enhance with Claude, GPT, etc.
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [contributing guidelines](CONTRIBUTING.md) for details.
+
+### **Ways to Contribute**
+- 🐛 Report bugs and suggest improvements
+- 📚 Improve documentation and examples  
+- 🔧 Add support for new languages/frameworks
+- 🎨 Create new workflow templates
+
+## 📄 License
+
+MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-**Built with Codex-OS** - Turning ideas into reliable software, one spec at a time.
+<div align="center">
+
+**Built with Codex-OS** — *Turning ideas into reliable software, one spec at a time.*
+
+[⭐ Star this repo](https://github.com/forsonny/codex-os) if you find it useful!
+
+</div>
