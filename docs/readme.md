@@ -1,5 +1,3 @@
-You're absolutely right! After cloning, we need to enter the repository directory. Here's the corrected installation section:
-
 # Codex-OS
 
 **A structured development operating system for turning product requirements into working software through consistent workflows, standards, and documentation.**
