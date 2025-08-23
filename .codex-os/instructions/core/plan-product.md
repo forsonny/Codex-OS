@@ -18,7 +18,7 @@ Use this workflow when a project is **new**, the PRD just landed, or product dir
 ---
 
 ## Inputs (read these first)
-- The PRD or source document (drop at `.codex-os/specs/<date>-<kebab-title>/srd.md`).
+- The PRD or source document (drop at `.codex-os/specs/srd.md`).
 - Any existing files in `.codex-os/product/` and `.codex-os/standards/`.
 - Constraints: deadlines, compliance, budget, team capacity, target platforms.
 
