@@ -21,7 +21,7 @@ Codex-OS helps teams:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/codex-os codex-os
+   git clone https://github.com/forsonny/codex-os codex-os
    cd codex-os
    ```
 
