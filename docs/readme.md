@@ -17,9 +17,41 @@ Codex-OS helps teams:
 
 ### Installation
 
-1. **Clone the repository to your project folder**:
+#### Option 1: Automated Installation (Recommended)
+
+1. **Clone the repository**:
    ```bash
-   git clone https://github.com/forsonny/codex-os codex-os
+   git clone https://github.com/yourusername/codex-os codex-os
+   cd codex-os
+   ```
+
+2. **Run the installation script**:
+   ```bash
+   chmod +x scripts/install-global.sh
+   ./scripts/install-global.sh
+   ```
+   
+   This script will:
+   - Move global files to `~/.codex-os/`
+   - Backup and install AGENTS.md to `~/.codex/`
+   - Clean up placeholder directories
+   - Verify the installation
+
+3. **Make helper scripts executable**:
+   ```bash
+   chmod +x bin/co-*
+   ```
+
+4. **Install dependencies** (if using the TypeScript/JavaScript stack):
+   ```bash
+   npm install  # or pnpm install
+   ```
+
+#### Option 2: Manual Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/codex-os codex-os
    cd codex-os
    ```
 
@@ -83,6 +115,9 @@ codex-os/
 │   ├── co-exec-tasks
 │   ├── co-exec-task
 │   └── co-analyze
+│
+├── scripts/         # Utility scripts
+│   └── install-global.sh  # Automated installation script
 │
 └── [other project files like package.json, tsconfig.json, etc.]
 ```
