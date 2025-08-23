@@ -303,6 +303,17 @@ MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
+## Support Codex-OS
+
+If you find Codex-OS helpful, consider supporting the project:
+
+[![ko-fi](assets/support_me_on_kofi_badge_blue.webp)](https://ko-fi.com/A0A11JWH8S)
+
+Your support helps maintain and improve Codex-OS!
+
+---
+
+
 <div align="center">
 
 **Built with Codex-OS** — *Turning ideas into reliable software, one spec at a time.*
