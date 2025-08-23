@@ -294,33 +294,7 @@ bin/co-analyze
 - **Small commits:** One logical change per commit
 - **Documentation requirements:** ADRs for architectural decisions
 
-## 📚 Documentation
 
-Each workflow has detailed documentation in `~/.codex-os/instructions/core/`:
-- [Plan Product](~/.codex-os/instructions/core/plan-product.md)
-- [Create Spec](~/.codex-os/instructions/core/create-spec.md)
-- [Execute Tasks](~/.codex-os/instructions/core/execute-tasks.md)
-- [Execute Single Task](~/.codex-os/instructions/core/execute-task.md)
-- [Analyze Product](~/.codex-os/instructions/core/analyze-product.md)
-
-## 🤝 Contributing
-
-1. Follow the standards in `.codex-os/standards/` or `~/.codex-os/standards/`
-2. Create specs for new features
-3. Write tests for all changes
-4. Update documentation as needed
-5. Use conventional commits
-
-## 📄 License
-
-[Add your license here]
-
-## 🙋 Support
-
-For questions or issues:
-- Check the documentation in `~/.codex-os/instructions/`
-- Review existing specs in `.codex-os/specs/`
-- Consult the standards in `~/.codex-os/standards/`
 
 ---
 
