@@ -1,3 +1,5 @@
+You're absolutely right! After cloning, we need to enter the repository directory. Here's the corrected installation section:
+
 # Codex-OS
 
 **A structured development operating system for turning product requirements into working software through consistent workflows, standards, and documentation.**
@@ -17,25 +19,113 @@ Codex-OS helps teams:
 
 ### Installation
 
-1. **Clone the repository** to your project:
+1. **Clone the repository to your project folder**:
    ```bash
-   # For project-local installation
-   git clone https://github.com/forsonny/codex-os .codex-os
+   git clone https://github.com/yourusername/codex-os codex-os
+   cd codex-os
    ```
 
-2. **Make helper scripts executable**:
+2. **Move global files to your home directory**:
+   ```bash
+   # Create the target directories
+   mkdir -p ~/.codex-os
+   mkdir -p ~/.codex
+   
+   # Move the CONTENTS of the global Codex-OS folder
+   mv "move to HOME/.codex-os"/* ~/.codex-os/
+   
+   # Backup existing AGENTS.md if it exists
+   if [ -f ~/.codex/AGENTS.md ]; then
+     cp ~/.codex/AGENTS.md ~/.codex/AGENTS.md.backup.$(date +%Y%m%d_%H%M%S)
+     echo "Backed up existing AGENTS.md to ~/.codex/AGENTS.md.backup.$(date +%Y%m%d_%H%M%S)"
+   fi
+   
+   # Move new AGENTS.md to ~/.codex directory
+   mv "move to HOME/.codex/AGENTS.md" ~/.codex/AGENTS.md
+   ```
+
+3. **Clean up placeholder directories**:
+   ```bash
+   # Remove the now-empty placeholder directories
+   rmdir "move to HOME/.codex-os/instructions/core"
+   rmdir "move to HOME/.codex-os/instructions"
+   rmdir "move to HOME/.codex-os/standards/code-style"
+   rmdir "move to HOME/.codex-os/standards"
+   rmdir "move to HOME/.codex-os/product"
+   rmdir "move to HOME/.codex-os"
+   rmdir "move to HOME/.codex"
+   rmdir "move to HOME"
+   ```
+
+4. **Make helper scripts executable**:
    ```bash
    chmod +x bin/co-*
    ```
 
-3. **Install dependencies** (if using the TypeScript/JavaScript stack):
+5. **Install dependencies** (if using the TypeScript/JavaScript stack):
    ```bash
    npm install  # or pnpm install
    ```
 
+### Directory Structure After Installation
+
+After installation, you'll have:
+
+**In your project directory (codex-os/):**
+```
+codex-os/
+├── .codex-os/       # Project-specific Codex-OS files
+│   ├── product/     # (initially empty, filled as you work)
+│   ├── specs/       # (initially empty, filled as you create specs)
+│   └── standards/   # (can override global standards if needed)
+│
+├── bin/             # Helper scripts
+│   ├── co-plan
+│   ├── co-create-spec
+│   ├── co-exec-tasks
+│   ├── co-exec-task
+│   └── co-analyze
+│
+└── [other project files like package.json, tsconfig.json, etc.]
+```
+
+**In your home directory (~/):**
+```
+~/.codex-os/         # Global Codex-OS defaults
+├── instructions/    # Core workflow playbooks
+│   └── core/
+│       ├── plan-product.md
+│       ├── create-spec.md
+│       ├── execute-tasks.md
+│       ├── execute-task.md
+│       └── analyze-product.md
+├── standards/       # Global coding standards
+│   ├── tech-stack.md
+│   ├── code-style.md
+│   ├── best-practices.md
+│   └── code-style/
+│       ├── typescript.md
+│       ├── python.md
+│       ├── javascript.md
+│       └── markdown.md
+└── product/         # Global product defaults
+
+~/.codex/
+├── AGENTS.md        # Global Codex guidance for AI assistants
+└── AGENTS.md.backup.* # Backup of previous AGENTS.md (if it existed)
+```
+
+### How It Works
+
+- **Project-local files take precedence**: When both `.codex-os/` (project) and `~/.codex-os/` (global) contain the same file, the project-local version is used
+- **Global defaults as fallback**: If a file doesn't exist in the project's `.codex-os/`, the system falls back to `~/.codex-os/`
+- **AGENTS.md**: Provides guidance for AI assistants using Codex-OS
+
 ### First Project Setup
 
 ```bash
+# From within the codex-os directory:
+
 # 1. Plan your product from a PRD
 bin/co-plan
 
@@ -60,7 +150,7 @@ bin/co-analyze
 │   ├── stack.md         # Technology choices
 │   └── analysis.md      # Generated codebase analysis
 │
-├── standards/           # Development standards
+├── standards/           # Development standards (optional, overrides global)
 │   ├── tech-stack.md    # Default technology choices
 │   ├── code-style.md    # Cross-language style guide
 │   ├── best-practices.md # Engineering principles
@@ -70,7 +160,7 @@ bin/co-analyze
 │       ├── javascript.md
 │       └── markdown.md
 │
-├── instructions/        # Workflow playbooks
+├── instructions/        # Workflow playbooks (usually in global)
 │   └── core/
 │       ├── plan-product.md    # Product planning workflow
 │       ├── create-spec.md     # Spec creation workflow
@@ -173,16 +263,16 @@ bin/co-analyze
 
 ## 📚 Documentation
 
-Each workflow has detailed documentation in `.codex-os/instructions/core/`:
-- [Plan Product](.codex-os/instructions/core/plan-product.md)
-- [Create Spec](.codex-os/instructions/core/create-spec.md)
-- [Execute Tasks](.codex-os/instructions/core/execute-tasks.md)
-- [Execute Single Task](.codex-os/instructions/core/execute-task.md)
-- [Analyze Product](.codex-os/instructions/core/analyze-product.md)
+Each workflow has detailed documentation in `~/.codex-os/instructions/core/`:
+- [Plan Product](~/.codex-os/instructions/core/plan-product.md)
+- [Create Spec](~/.codex-os/instructions/core/create-spec.md)
+- [Execute Tasks](~/.codex-os/instructions/core/execute-tasks.md)
+- [Execute Single Task](~/.codex-os/instructions/core/execute-task.md)
+- [Analyze Product](~/.codex-os/instructions/core/analyze-product.md)
 
 ## 🤝 Contributing
 
-1. Follow the standards in `.codex-os/standards/`
+1. Follow the standards in `.codex-os/standards/` or `~/.codex-os/standards/`
 2. Create specs for new features
 3. Write tests for all changes
 4. Update documentation as needed
@@ -195,9 +285,9 @@ Each workflow has detailed documentation in `.codex-os/instructions/core/`:
 ## 🙋 Support
 
 For questions or issues:
-- Check the documentation in `.codex-os/instructions/`
+- Check the documentation in `~/.codex-os/instructions/`
 - Review existing specs in `.codex-os/specs/`
-- Consult the standards in `.codex-os/standards/`
+- Consult the standards in `~/.codex-os/standards/`
 
 ---
 
