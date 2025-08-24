@@ -1,112 +1,125 @@
-# Codex-OS — Global Tech Stack Defaults
+# Codex-OS — Global Tech Stack Defaults (Bun + Your Defaults)
+
 > Opinionated defaults for greenfield projects. Prefer boring, well-supported tech. Override per-project in `.codex-os/product/stack.md`.
 
 ---
 
 ## 1) Language & Runtime
-- **TypeScript** (Node.js **LTS**; prefer pnpm) — primary for full‑stack web.
-- **Python 3.12+** — data workflows, services where Python libs shine.
-- **Shell (bash)** — ops scripts; keep portable (no bashisms when possible).
+
+* **TypeScript** on **Bun 1.x** (package manager, runner, bundler, test).
+* **Python 3.12+** — data workflows where Py libs shine.
+* **Shell (bash)** — ops scripts; keep portable.
 
 **Package managers**
-- **pnpm** (JS/TS), fallback: npm
-- **uv** (Python) for fast, reproducible envs; fallback: `pip + venv`
-- **pre-commit** for multi-language hooks
+
+* **Bun** (primary) — `bun install`, `bun run`, `bunx` (use `--frozen-lockfile` in CI)
+* **uv** (Python) → fallback `pip + venv`
+* **pre-commit** for multi-lang hooks
 
 ---
 
 ## 2) Application Presets
 
-### A) Full‑stack Web (Default)
-- **Frontend**: React 18 + **Next.js 14+ (App Router, RSC)**  
-  UI: Tailwind CSS, shadcn/ui, Radix Primitives
-- **Backend**: **FastAPI** (Python) *or* **NestJS** (TS). Choose one:
-  - **TS path**: NestJS + Prisma + Zod (shared models); pino logging
-  - **Py path**: FastAPI + SQLAlchemy + Pydantic; structlog logging
-- **Database**: **PostgreSQL 15+**
-- **Cache / Queues**: **Redis 7+** (keys, pub/sub, streams; rate limits)
-- **ORM / DB toolkit**:
-  - TS: **Prisma** (preferred) or Drizzle
-  - Py: **SQLAlchemy 2.x** + Alembic migrations
-- **API**: REST first, **OpenAPI 3.1**; optional GraphQL via Apollo/Envelop
-- **Auth**: **Auth.js** (NextAuth) on TS path; **Auth0**/**OIDC** on both paths
-- **File storage**: S3‑compatible (AWS S3, MinIO during dev)
-- **Background jobs**:
-  - TS: BullMQ or simple ECS/Cloud Run cron
-  - Py: RQ or Celery (only when needed; prefer simpler first)
+### A) Full-stack Web (Default)
 
-### B) Service‑only (API) Minimal
-- FastAPI *or* NestJS (no frontend), Postgres, Redis, OpenAPI.
+* **Framework**: **Next.js 14+ (App Router, RSC)**
+* **UI/UX**: **Tailwind CSS + shadcn/ui**, **dark mode** first-class
+* **Auth & Billing**: **Clerk**
+* **Database / State**: **Convex** (primary)
+  *Optional relational adjunct:* Postgres for analytics/reporting.
+* **AI**: **AI SDK** ([https://ai-sdk.dev/](https://ai-sdk.dev/)) for model/runtime wiring
+* **API shape**: REST (route handlers), `OpenAPI` (generated or zod-openapi); tRPC optional
+* **File storage**: S3-compatible (MinIO locally)
+
+**Background jobs & schedulers**
+
+* Platform crons (Vercel Cron or Cloudflare Cron Triggers); lightweight jobs via Route Handlers/Workers; Redis/queues only when needed.
+
+### B) Service-only (API) Minimal
+
+* **Next.js (route handlers)** + Convex (or Postgres) + OpenAPI
 
 ### C) CLI / Tooling
-- Python + Typer/Rich *or* Node + Commander/oclif.
+
+* TS on Bun (+ Commander/oclif) or Python + Typer/Rich.
 
 ---
 
 ## 3) Quality Gates & Tooling
 
 ### Formatting & Linting
-- **TypeScript**: eslint + @typescript-eslint, **Prettier** (opinionated config)
-- **Python**: **ruff** (lint + format), **black** (if project prefers), **isort**
-- **Markdown**: markdownlint-cli2; prose rules kept light
+
+* **TS**: eslint (+ `eslint-config-next` where relevant) + **Prettier**
+* **Py**: **ruff** (lint+fmt), **black** (optional), **isort**
+* **Markdown**: markdownlint-cli2
 
 ### Types & Static Analysis
-- **TS**: `tsc --noEmit` (strict), **ts-reset** optional
-- **Python**: **mypy** (strict-ish, gradually tightened)
+
+* **TS**: `tsc --noEmit` (strict), `ts-reset` optional
+* **Py**: **mypy** (tighten gradually)
 
 ### Tests
-- **Unit**: Vitest (TS), **pytest** (Py)
-- **E2E**: **Playwright**
-- **Coverage targets**: start at 70%, climb with risk
+
+* **Unit (TS)**: `bun test` (supports `--coverage`)
+* **Unit (Py)**: `pytest`
+* **E2E**: **Playwright** (run via `bunx playwright …`)
+* **Coverage targets**: start 70%, raise with risk
 
 ### Security
-- Dependency scanning: `npm audit`, `pnpm audit`, `pip-audit`
-- Static checks: Bandit (Py), eslint security plugins (TS)
-- Containers: **Trivy**
-- Secrets: git-secrets or gitleaks (pre-commit hook)
+
+* **JS/TS**: `bun audit` (fallback: `npm/pnpm audit`)
+* **Py**: `pip-audit`
+* **Static**: Bandit (Py), eslint security plugins (TS)
+* **Containers**: Trivy
+* **Secrets**: git-secrets or gitleaks (pre-commit)
 
 ### Observability
-- **Logging**: pino (TS) / structlog (Py); JSON logs in prod
-- **Tracing/Metrics**: **OpenTelemetry** SDK; OTLP exporter
-- **Error tracking**: Sentry (server & client) or OpenTelemetry collector → backend
+
+* **Logging**: pino (TS) / structlog (Py); JSON logs in prod
+* **Tracing/Metrics**: OpenTelemetry (OTLP)
+* **Errors**: Sentry (client+server) or OTEL collector → backend
 
 ---
 
 ## 4) DevEx & Build
 
-- **Task runner**: **Justfile** (preferred) or Makefile
-- **Env**: `.env` + direnv (never commit secrets)
-- **Containers**: Docker, **docker-compose** for local stacks
-- **CI/CD**: GitHub Actions (workflows: lint, test, build, image, deploy)
-- **Docs**: Docusaurus (TS) or MkDocs‑Material (Py/neutral)
-- **API docs**: OpenAPI via FastAPI/NestJS generator published to `/docs`
-- **Codegen**: OpenAPI → client SDKs (or tRPC on TS path, case-by-case)
+* **Task runner**: **Justfile** (preferred) or Makefile
+* **Env**: `.env` + direnv (never commit secrets)
+* **Containers**: Docker; `docker-compose` for local stacks
+* **CI/CD**: GitHub Actions (lint, test, build, image, deploy). Use `oven-sh/setup-bun@v2` + `bun install --frozen-lockfile`.
+* **Docs**: Docusaurus (TS) or MkDocs-Material
+* **API docs**: publish OpenAPI to `/docs`
+* **Codegen**: OpenAPI → SDKs; or tRPC where it fits
 
 ---
 
 ## 5) Database & Migrations
 
-- **PostgreSQL** default; use UUID primary keys; `created_at/updated_at` columns
-- Migrations:
-  - TS: Prisma Migrate
-  - Py: Alembic (autogenerate + review)
-- Seed data & fixtures maintained alongside migrations
-- Use views/materialized views for reporting; avoid complex DB logic in app
+* **Primary app state**: **Convex**
+
+  * Functions in `/convex`; schema/types colocated.
+  * No traditional SQL migrations; treat functions as versioned change points.
+* **Relational sidecar (optional)**: **PostgreSQL 15+**
+
+  * Migrations: **Prisma Migrate** (TS) or **Alembic** (Py)
+  * Use UUID PKs; `created_at/updated_at`; views/materialized views for reporting.
 
 ---
 
 ## 6) Project Layouts
 
-### TS + Next.js + NestJS (monorepo option)
+### Next.js + Convex (monorepo)
+
 ```
-/apps/web          # Next.js app
-/apps/api          # NestJS service
-/packages/ui       # shared UI (shadcn/ui wrappers)
-/packages/config   # eslint, tsconfig, prettier presets
-/packages/types    # shared zod schemas & types
+/apps/web              # Next.js app (App Router)
+/convex/               # Convex functions, schema, server code
+/packages/ui           # shared UI (shadcn/ui wrappers)
+/packages/config       # eslint, tsconfig, prettier, tailwind presets
+/packages/types        # shared zod schemas & types
 ```
 
-### Python + FastAPI
+### Python + FastAPI (when needed)
+
 ```
 /src/app/__init__.py
 /src/app/api/routers.py
@@ -120,67 +133,89 @@
 
 ## 7) Runtime & Deployment
 
-- **Containers**: Build minimal images
-  - Python: `python:3.12-slim` + uv/venv; run as non‑root
-  - Node: `node:20-alpine` (LTS) + pnpm; run as non‑root
-- **12‑factor**: config via env vars; mount secrets at runtime
-- **Health**: `/healthz` (liveness), `/readyz` (readiness)
-- **Migrations**: run on startup job (idempotent) before app
-- **Horizontal scaling**: stateless app; sessions via signed cookies or Redis
+* **Local/dev**: Bun runner; Next dev server; Convex dev (`bunx convex dev`)
+* **Hosting (default)**: **Vercel** for simplicity & DX
+* **Hosting (when you need more)**: **Cloudflare Pages + Workers**
+
+  * Next on Pages/Workers for global edge, Cron Triggers, Queues, KV/D1/R2 as needed
+* **Containers** (when not serverless):
+
+  * **TS (Bun)**: `FROM oven/bun:1-alpine`, non-root
+  * **Python**: `python:3.12-slim`, non-root
+* **12-factor**: config via env vars; mount secrets at runtime
+* **Health**: `/healthz` (liveness) & `/readyz` (readiness)
+* **Migrations**: run before app starts (idempotent)
+* **Scale**: stateless; sessions via signed cookies or platform store
 
 ---
 
 ## 8) Versioning, Releases, and Commits
 
-- **SemVer** for packages; tag Docker images with `git sha` + semver
-- **Conventional Commits** + **commitlint**
-- **Changesets** (monorepo) or semantic‑release (single repo)
-- **Changelog** auto-generated
+* **SemVer** for packages; tag images with `git sha` + semver
+* **Conventional Commits** + **commitlint**
+* **Changesets** (monorepo) or **semantic-release** (single repo)
+* **Changelog** auto-generated
 
 ---
 
-## 9) Defaults by Use‑Case
+## 9) Defaults by Use-Case
 
-- **Internal Admin Tools**: TS + Next.js (App Router) + tRPC; DB Postgres; Auth via internal SSO/OIDC
-- **Public API**: FastAPI + Postgres; strict OpenAPI; API keys + OAuth; rate limiting via Redis
-- **Data Tasks**: Python + Pydantic + Polars/Pandas; Airflow/Prefect only if needed
+* **Internal Admin Tools**: Next.js (App Router) + shadcn/tailwind (dark-first), **Clerk**, **Convex**, tRPC optional
+* **Public API**: Next.js route handlers (REST/OpenAPI) + **Clerk** (tokens) + Convex or Postgres; rate-limit via platform middleware/edge
+* **AI-powered Products**: **AI SDK** + Next.js server actions/route handlers; stream responses (SSE) to UI; persist convos/state in Convex
+* **Data Tasks**: Python + Pydantic + Polars/Pandas; add orchestration only if needed
 
 ---
 
 ## 10) When to Deviate
-Deviate only with a written note in `product/decisions.md`:
-- Regulatory requirements
-- Vendor lock‑in concerns
-- Team expertise profile
-- Performance constraints demonstrated by profiling
+
+Deviate only with a note in `product/decisions.md`:
+
+* Regulatory needs
+* Vendor lock-in concerns
+* Team expertise profile
+* Proven performance constraints (via profiling)
 
 ---
 
-## 11) Starter “Justfile” (excerpt)
-```
+## 11) Starter “Justfile” (Bun + Next + Convex)
+
+```make
 default: lint test
 
-lint: 
-	eslint . && prettier -c . || true
+lint:
+	bunx eslint . && bunx prettier -c . || true
 	ruff check . || true
 
 test:
-	pnpm -C apps/web test
-	pnpm -C apps/api test
+	bun test --coverage
 	pytest -q || true
 
 dev:
-	pnpm -C apps/web dev & pnpm -C apps/api start:dev
+	# Next app + Convex dev server
+	bunx concurrently -n next,convex -c auto \
+		"bun run --cwd apps/web dev" \
+		"bunx convex dev"
+
+build:
+	bun run --cwd apps/web build
+
+typecheck:
+	bunx tsc --noEmit
 ```
 
 ---
 
 ## 12) Minimal Service Checklist
-- [ ] Lint + format clean
-- [ ] Unit tests + a Playwright smoke test
-- [ ] OpenAPI published
-- [ ] Health endpoints wired
-- [ ] Dockerfile + compose
-- [ ] CI (lint/test/build) green
-- [ ] Error tracking & tracing configured
-- [ ] Baseline dashboards/alerts
+
+* [ ] Lint + format clean
+* [ ] Unit tests (`bun test --coverage`) + a Playwright smoke test
+* [ ] OpenAPI published (route handlers or generator)
+* [ ] Clerk wired (auth flows + protected routes) and billing enabled
+* [ ] Convex wired (schema + first query/mutation + RLS/permissions model)
+* [ ] Health endpoints wired
+* [ ] Dockerfile + compose (if not serverless)
+* [ ] CI (lint/test/build) green (`setup-bun`, `bun install --frozen-lockfile`)
+* [ ] Error tracking & tracing configured
+* [ ] Baseline dashboards/alerts
+* [ ] Dark mode verified (UI tokens, theming, SEO/meta colors)
