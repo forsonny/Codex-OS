@@ -1,0 +1,44 @@
+# wrangler.toml — Cloudflare Pages + Workers (Next on Pages)
+# Docs: https://developers.cloudflare.com/pages/framework-guides/deploy-a-nextjs-site/#next-on-pages
+# Build locally with: bunx @cloudflare/next-on-pages@latest build
+# Then deploy to Cloudflare Pages (project must be created in the dashboard).
+
+name = "codex-os"
+compatibility_date = "2025-08-24"
+compatibility_flags = ["nodejs_compat"]
+
+# Where Next on Pages writes static assets for Pages.
+pages_build_output_dir = ".vercel/output/static"
+
+[build]
+# Uses the Next on Pages adapter; you can add flags like --experimental-minify
+command = "bunx @cloudflare/next-on-pages@latest build"
+
+# Optional default vars for local `wrangler pages dev` (override per env below or via Dashboard)
+[vars]
+# NEXT_PUBLIC_APP_URL = "http://localhost:3000"
+# NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY = ""
+# CLERK_SECRET_KEY = ""
+# NEXT_PUBLIC_CONVEX_URL = "http://localhost:8187"
+# AI_SDK_LOG_LEVEL = "info"
+
+# Production-only overrides
+[env.production]
+compatibility_flags = ["nodejs_compat"]
+[env.production.vars]
+# APP_URL = "https://your-domain.com"
+# NEXT_PUBLIC_APP_URL = "https://your-domain.com"
+# NEXT_PUBLIC_CONVEX_URL = "https://<deployment>.convex.cloud"
+# NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY = "pk_live_..."
+# CLERK_SECRET_KEY = "sk_live_..."
+# OPENAI_API_KEY = ""
+# ANTHROPIC_API_KEY = ""
+# GOOGLE_GENERATIVE_AI_API_KEY = ""
+# GROQ_API_KEY = ""
+# OPENROUTER_API_KEY = ""
+# FIREWORKS_API_KEY = ""
+# SENTRY_DSN = ""
+# OTEL_EXPORTER_OTLP_ENDPOINT = ""
+
+# Note: Secrets should be stored via `wrangler secret put` or the Pages dashboard,
+# not committed here. Bindings for KV/D1/R2/Queues can also be declared here if used.

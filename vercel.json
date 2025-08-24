@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "framework": "nextjs",
+  "installCommand": "bun install --frozen-lockfile",
+  "buildCommand": "bun run build",
+  "devCommand": "bun run dev",
+  "functions": {
+    "app/api/**/*.ts": { "runtime": "edge" },
+    "app/api/**/*.tsx": { "runtime": "edge" }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "geolocation=(), microphone=(), camera=()" },
+        { "key": "Content-Security-Policy", "value": "frame-ancestors 'none'; upgrade-insecure-requests" }
+      ]
+    }
+  ],
+  "rewrites": [
+    { "source": "/healthz", "destination": "/api/healthz" },
+    { "source": "/readyz", "destination": "/api/readyz" }
+  ]
+}
